@@ -3,17 +3,18 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",           // Your workspace includes
+                "C:/msys64/mingw64/include"        // Path to GMP headers
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "C:\\mingw64\\bin\\gcc.exe",
-            "cStandard": "c17",
-            "cppStandard": "gnu++14",
-            "intelliSenseMode": "windows-gcc-x64"
+            "compilerPath": "C:\\mingw64\\bin\\gcc.exe",  // Path to the GCC compiler
+            "cStandard": "c17",                         // C standard (adjust if needed)
+            "cppStandard": "gnu++14",                   // C++ standard (adjust if needed)
+            "intelliSenseMode": "windows-gcc-x64"       // IntelliSense mode to match your compiler
         }
     ],
     "version": 4

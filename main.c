@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include "two_primes_generation.h"  // Include the header file
+
 
 int main (){
 
@@ -9,6 +11,10 @@ int main (){
     *b = *b +10;
     printf("HELLO WORLD");
 
+    checkinclude();
+
     return 0;
+
+
 
 }

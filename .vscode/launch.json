@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "C:/Users/johnn/Desktop/GitHub_Tuc/Aafaleia_Systhmaton_1/main.exe",  // Path to your main.exe
+            "args": [],  // Arguments for the program, leave empty if not needed
+            "stopAtEntry": false,  // Set to true if you want to stop at the main function
+            "cwd": "C:/Users/johnn/Desktop/GitHub_Tuc/Aafaleia_Systhmaton_1",  // Set current working directory
+            "environment": [],
+            "externalConsole": false,  // Set to true if you prefer a separate console window
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/mingw64/bin/gdb.exe",  // Path to gdb debugger
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "C/C++: gcc.exe build active file with GMP",  // Ensure the build task is run before debug
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}

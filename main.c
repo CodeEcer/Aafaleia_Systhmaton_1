@@ -1,20 +1,10 @@
 #include <stdio.h>
-#include "two_primes_generation.h"  // Include the header file
+#include "key_generation.h"
 
 
-int main (){
-
-    int a=14;
-    printf("Address of a: %p\n", &a);  // %p is used for printing addresses
-    int *b;
-    b = &a;
-    *b = *b +10;
-    printf("HELLO WORLD");
-
-    checkinclude();
+int main() {
+    
+    key_generate(1024);
 
     return 0;
-
-
-
 }

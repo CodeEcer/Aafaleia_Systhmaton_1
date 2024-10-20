@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "prime_generation.h": "c",
+        "gmp.h": "c"
+    }
+}

@@ -9,7 +9,8 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "main.c",                      // Compile main.c
-                "two_primes_generation.c",             // Compile key_generation.c as well
+                "prime_generation.c",
+                "key_generation.c",             // Compile key_generation.c as well
                 "-o",
                 "main.exe",                     // Output the executable
                 "-IC:/msys64/mingw64/include",  // GMP include path

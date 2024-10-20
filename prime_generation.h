@@ -1,5 +1,5 @@
-#ifndef TWO_PRIMES_GENERATION_H
-#define TWO_PRIMES_GENERATION_H
+#ifndef PRIME_GENERATION_H
+#define PRIME_GENERATION_H
 
 #include <gmp.h>  // GMP library
 
@@ -7,7 +7,6 @@
 void generate_random_number(mpz_t result, int bits);
 int is_prime(mpz_t n, int iterations);
 void generate_prime(mpz_t prime, int bits);
-int key_generate();
-void checkinclude();
+void prime_generate();
 
-#endif  // TWO_PRIMES_GENERATION_H
+#endif  // _PRIME_GENERATION_H

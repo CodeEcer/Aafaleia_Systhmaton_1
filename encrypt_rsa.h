@@ -4,7 +4,8 @@
 #include <gmp.h>  // GMP library
 
 // Declaration of the RSA encryption function
-void encrypt(mpz_t n, mpz_t e);
+void encrypt(const char* key_file,const char* original_message,const char* encrypted_message);
+void read_public_key_from_file(const char* filename,mpz_t n, mpz_t e);
 
 // Declaration of the function to read a message from a file
 char* read_file(const char* filename);

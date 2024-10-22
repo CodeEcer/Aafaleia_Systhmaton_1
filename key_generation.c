@@ -5,12 +5,12 @@
 
 
 // Function to generate the key using two prime numbers
-void key_generate(mpz_t n,mpz_t e,mpz_t d,int key_length) {
+void key_generate(const char* filename,int key_length) {
     printf("Mesa sto key generate \n");
-    mpz_t p, q, lambda;                 // Declare GMP large integer types
+    mpz_t p, q,n, lambda,e,d;                 // Declare GMP large integer types
     int prime_length = key_length / 2;      // Set the prime length (e.g., 512 bits if key_length is 1024)
 
-    mpz_inits(p, q, lambda, NULL);
+    mpz_inits(p, q,n, lambda,e,d, NULL);
 
 
     // Generate two prime numbers
@@ -61,8 +61,35 @@ void key_generate(mpz_t n,mpz_t e,mpz_t d,int key_length) {
 
     mpz_invert(d, e, lambda);
 
-
+    //write keys n,e,d to file
+    write_keys_to_file(filename,n,e,d,key_length);
 
     // Clear memory for GMP variables
-    // mpz_clears(p, q, n, e, lambda, d, NULL);
+    mpz_clears(p,q_minus_1 ,p_minus_1,q, n, e, lambda, d, NULL);
+}
+
+void write_keys_to_file(const char* filename, mpz_t n, mpz_t e, mpz_t d, int BUFFER_SIZE) {
+    FILE* file = fopen(filename, "w");
+    if (!file) {
+        printf("Error: Could not open file %s\n", filename);
+        exit(1);
+    }
+
+    // Buffer to store the formatted output
+    char buffer[BUFFER_SIZE];
+
+    // Write n
+    gmp_sprintf(buffer, "%Zd\n", n);  // Format n as a string
+    fprintf(file, "n: %s", buffer);   // Write the formatted string to the file
+
+    // Write e
+    gmp_sprintf(buffer, "%Zd\n", e);  // Format e as a string
+    fprintf(file, "e: %s", buffer);   // Write the formatted string to the file
+
+    // Write d
+    gmp_sprintf(buffer, "%Zd\n", d);  // Format d as a string
+    fprintf(file, "d: %s", buffer);   // Write the formatted string to the file
+
+    fclose(file);
+    printf("Keys successfully written to %s\n", filename);
 }

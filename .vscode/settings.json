@@ -1,10 +1,16 @@
 {
-    "files.associations": {
-        "prime_generation.h": "c",
-        "gmp.h": "c",
-        "key_generation.h": "c",
-        "time.h": "c",
-        "psapi.h": "c",
-        "performance.h": "c"
-    }
+    "terminal.integrated.profiles.windows": {
+        "Git Bash": {
+            "path": "C:\\Program Files\\Git\\bin\\bash.exe"
+        },
+        "MSYS2 MinGW64": {
+            "path": "C:\\msys64\\usr\\bin\\bash.exe",
+            "args": ["--login", "-i"],
+            "env": {
+                "MSYSTEM": "MINGW64",
+                "CHERE_INVOKING": "1"
+            }
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "MSYS2 MinGW64"
 }

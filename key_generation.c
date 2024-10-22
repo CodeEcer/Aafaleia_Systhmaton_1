@@ -14,11 +14,13 @@ void key_generate(mpz_t n,mpz_t e,mpz_t d,int key_length) {
 
 
     // Generate two prime numbers
+    init_random_state();
     prime_generate(p, prime_length);        // Generate prime p
     gmp_printf("Generated Prime p: %Zd\n", p);
+    // mpz_nextprime (q,p);
+    // gmp_printf("Generated Prime q: %Zd\n", q);
     do {
     printf("Mesa sto while gia to q \n");
-    gmp_printf("Generated Prime p: %Zd\n", p);
     prime_generate(q, prime_length);        // Generate prime q
     gmp_printf("Generated Prime q: %Zd\n", q);}
     while (mpz_cmp(p, q) == 0);

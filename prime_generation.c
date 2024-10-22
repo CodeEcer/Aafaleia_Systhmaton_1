@@ -1,5 +1,6 @@
 #include <gmp.h>
 #include <time.h>
+#include <stdio.h>
 
 // Function to generate a random number with 'bits' length
 void generate_random_number(mpz_t result, int bits) {
@@ -26,6 +27,6 @@ void generate_prime(mpz_t prime, int bits) {
 
 // Function to generate a prime and return it by setting the 'prime' parameter
 void prime_generate(mpz_t prime, int prime_length) {
+    printf("Mesa sto prime generate \n");
     generate_prime(prime, prime_length);   // Generate a prime number of the specified bit length
-    gmp_printf("Generated Prime p: %Zd\n", prime);  // Print the generated prime
 }

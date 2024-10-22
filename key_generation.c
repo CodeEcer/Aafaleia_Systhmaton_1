@@ -1,24 +1,29 @@
 #include <gmp.h>
 #include "prime_generation.h"
 #include "key_generation.h"
+#include <stdio.h>
 
 
 // Function to generate the key using two prime numbers
-void key_generate(int key_length) {
-    mpz_t p, q, n, lambda,e,d;                 // Declare GMP large integer types
+void key_generate(mpz_t n,mpz_t e,mpz_t d,int key_length) {
+    printf("Mesa sto key generate \n");
+    mpz_t p, q, lambda;                 // Declare GMP large integer types
     int prime_length = key_length / 2;      // Set the prime length (e.g., 512 bits if key_length is 1024)
 
-    // Initialize the mpz_t variables
-    mpz_init(p);
-    mpz_init(q);
-    mpz_init(n);
-    mpz_init(lambda);
-    mpz_init(e);
-    mpz_init(d);
+    mpz_inits(p, q, lambda, NULL);
+
 
     // Generate two prime numbers
     prime_generate(p, prime_length);        // Generate prime p
+    gmp_printf("Generated Prime p: %Zd\n", p);
+    do {
+    printf("Mesa sto while gia to q \n");
+    gmp_printf("Generated Prime p: %Zd\n", p);
     prime_generate(q, prime_length);        // Generate prime q
+    gmp_printf("Generated Prime q: %Zd\n", q);}
+    while (mpz_cmp(p, q) == 0);
+
+
 
     // Calculate n = p * q
     mpz_mul(n, p, q);                       // n = p * q
@@ -33,17 +38,29 @@ void key_generate(int key_length) {
 
     mpz_mul(lambda, p_minus_1, q_minus_1);  // lambda = (p - 1) * (q - 1)
 
-    // Print the results
-    gmp_printf("p: %Zd\n", p);
-    gmp_printf("q: %Zd\n", q);
-    gmp_printf("n: %Zd\n", n);
-    gmp_printf("lambda: %Zd\n", lambda);
+
+    mpz_t gcd_result, mod_result;
+
+    // Initialize temporary variables
+    mpz_init(gcd_result);
+    mpz_init(mod_result);
+
+    // Loop to generate e until it satisfies both conditions
+    do {
+        prime_generate(e, 18);  // Generate a prime e (size 18 bits in this case)
+        // Compute e % lambda
+        mpz_mod(mod_result, e, lambda);  
+
+        // Compute gcd(e, lambda)
+        mpz_gcd(gcd_result, e, lambda); 
+
+    } while (mpz_cmp(e, lambda) >= 0 || mpz_cmp_ui(mod_result, 0) == 0 || mpz_cmp_ui(gcd_result, 1) != 0);
+
+
+    mpz_invert(d, e, lambda);
+
+
 
     // Clear memory for GMP variables
-    mpz_clear(p);
-    mpz_clear(q);
-    mpz_clear(n);
-    mpz_clear(lambda);
-    mpz_clear(p_minus_1);
-    mpz_clear(q_minus_1);
+    // mpz_clears(p, q, n, e, lambda, d, NULL);
 }

@@ -2,6 +2,7 @@
 #include "key_generation.h"
 #include <gmp.h>
 #include "encrypt_rsa.h"
+#include "decrypt_rsa.h"
 
 
 int main() {
@@ -12,6 +13,8 @@ int main() {
     key_generate(n,e,d,1024);
 
     encrypt(n,e);
+
+    decrypt(n,d);
 
     return 0;
 }

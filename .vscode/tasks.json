@@ -12,13 +12,15 @@
                 "prime_generation.c",
                 "key_generation.c",
                 "encrypt_rsa.c",             // Compile key_generation.c as well
-                "decrypt_rsa.c",             // Compile key_generation.c as well
+                "decrypt_rsa.c",
+                "performance.c",             // Compile key_generation.c as well
                 "-o",
                 "main.exe",                     // Output the executable
                 "-IC:/msys64/mingw64/include",  // GMP include path
                 "-LC:/msys64/mingw64/lib",      // GMP library path
                 "-lgmp",                        // Link GMP library
-                "-lgmpxx"                       // Link GMP C++ library (optional)
+                "-lgmpxx",                       // Link GMP C++ library (optional)
+                "-lpsapi"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"

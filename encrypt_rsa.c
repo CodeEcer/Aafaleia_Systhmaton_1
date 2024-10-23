@@ -6,15 +6,13 @@
 
 // RSA encryption function
 void encrypt(const char* key_file, const char* original_message, const char* encrypted_message) {
-    printf("Inside encrypt function\n");
-
     mpz_t n, e;
     mpz_inits(n, e, NULL);
 
     // Read the public key (n, e) from the key file
     read_public_key_from_file(key_file, n, e);
 
-    // Read the original message from the file "original_message"
+    // Read the message from the file
     char* text = read_file(original_message);
     int length = strlen(text);  // Get the length of the original message
 
@@ -58,10 +56,6 @@ void encrypt(const char* key_file, const char* original_message, const char* enc
     mpz_clears(n, e, NULL);  // Clear the key values (n, e)
     free(text);  // Free the dynamically allocated memory for the message
 }
-
-
-#include <gmp.h>
-#include <stdio.h>
 
 void read_public_key_from_file(const char* filename, mpz_t n, mpz_t e) {
     FILE* file = fopen(filename, "r");

@@ -80,7 +80,6 @@ int main(int argc, char *argv[])
         printf("Input file: %s\n", input_file);
         printf("Output file: %s\n", output_file);
         printf("Key file: %s\n", key_file);
-
         // Call encryption function
         encrypt(key_file, input_file, output_file);
     }

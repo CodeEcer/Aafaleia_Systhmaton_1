@@ -2,12 +2,9 @@
 #include <gmp.h>
 #include <stdlib.h>
 #include "decrypt_rsa.h"
-// Function to read the encrypted numbers from the file
 
-// RSA decryption function
 void decrypt(const char* key_file,const char* encrypted_message,const char* original_message) {
-    printf("Inside decrypt function\n");
-
+    
     mpz_t n,d;
     mpz_inits(n,d,NULL);
 

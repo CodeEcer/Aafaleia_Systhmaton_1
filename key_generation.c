@@ -7,8 +7,7 @@
 
 // Function to generate the key using two prime numbers
 void key_generate(int key_length) {
-    printf("Mesa sto key generate \n");
-    mpz_t p, q,n, lambda,e,d;                 // Declare GMP large integer types
+    mpz_t p, q,n, lambda,e,d;                // Declare GMP types
     int prime_length = key_length / 2;      // Set the prime length (e.g., 512 bits if key_length is 1024)
 
     mpz_inits(p, q,n, lambda,e,d, NULL);
@@ -17,19 +16,15 @@ void key_generate(int key_length) {
     // Generate two prime numbers
     init_random_state();
     prime_generate(p, prime_length);        // Generate prime p
-    gmp_printf("Generated Prime p: %Zd\n", p);
-    // mpz_nextprime (q,p);
-    // gmp_printf("Generated Prime q: %Zd\n", q);
     do {
-    printf("Mesa sto while gia to q \n");
-    prime_generate(q, prime_length);        // Generate prime q
-    gmp_printf("Generated Prime q: %Zd\n", q);}
+    prime_generate(q, prime_length);        // Generate prime q =!p
+    }
     while (mpz_cmp(p, q) == 0);
 
 
 
     // Calculate n = p * q
-    mpz_mul(n, p, q);                       // n = p * q
+    mpz_mul(n, p, q);                  
 
     // Calculate lambda = (p - 1) * (q - 1)
     mpz_t p_minus_1, q_minus_1;
@@ -48,9 +43,10 @@ void key_generate(int key_length) {
     mpz_init(gcd_result);
     mpz_init(mod_result);
 
-    // Loop to generate e until it satisfies both conditions
+    // Loop to generate e untill it satisfies all conditions
     do {
-        prime_generate(e, 18);  // Generate a prime e (size 18 bits in this case)
+        prime_generate(e, 18);  // Generate a prime e (size 18 bits in this case, does not have to be very large in order to save computational time in encryption)
+
         // Compute e % lambda
         mpz_mod(mod_result, e, lambda);  
 
@@ -59,18 +55,18 @@ void key_generate(int key_length) {
 
     } while (mpz_cmp(e, lambda) >= 0 || mpz_cmp_ui(mod_result, 0) == 0 || mpz_cmp_ui(gcd_result, 1) != 0);
 
-
+    //Calculate d as modular inverse of e,lambda
     mpz_invert(d, e, lambda);
 
     //write keys n,e,d to file
     write_keys_to_file(n,e,d,key_length);
 
     // Clear memory for GMP variables
-    mpz_clears(p,q_minus_1 ,p_minus_1,q, n, e, lambda, d, NULL);
+    mpz_clears(p,q_minus_1 ,p_minus_1,q, n, e, lambda, d,gcd_result,mod_result, NULL);
 }
 
 void write_keys_to_file(mpz_t n, mpz_t e, mpz_t d, int key_length) {
-    // Create filenames for public and private key files with .key extension
+    // Create filenames for public and private key files
     char public_key_file[256];
     char private_key_file[256];
 

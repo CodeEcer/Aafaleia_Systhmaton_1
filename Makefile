@@ -4,8 +4,8 @@ CFLAGS = -g -Wall -IC:/msys64/mingw64/include
 LDFLAGS = -LC:/msys64/mingw64/lib -lgmp -lgmpxx -lpsapi
 
 # Executable and object files
-EXEC = main.exe
-OBJS = main.o prime_generation.o key_generation.o encrypt_rsa.o decrypt_rsa.o performance.o
+EXEC = rsa_assign_1.exe
+OBJS = rsa_assign_1.o prime_generation.o key_generation.o encrypt_rsa.o decrypt_rsa.o performance.o
 TXT_FILE = test_performance.txt
 
 # Rule for building the entire program
@@ -17,8 +17,8 @@ $(TXT_FILE):
 	echo "This is the initial content for test_performance.txt." > $(TXT_FILE)
 
 # Compile source files into object files
-main.o: main.c
-	$(CC) $(CFLAGS) -c main.c -o main.o
+rsa_assign_1.o: rsa_assign_1.c
+	$(CC) $(CFLAGS) -c rsa_assign_1.c -o rsa_assign_1.o
 
 prime_generation.o: prime_generation.c
 	$(CC) $(CFLAGS) -c prime_generation.c -o prime_generation.o
